@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>User Profile</title>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="assets/css/kendo.common.min.css">
+    <link rel="stylesheet" href="assets/css/kendo.default.min.css">
+    <link rel="stylesheet" href="assets/css/kendo.default.mobile.min.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/remax.css">
+    <link rel="stylesheet" href="assets/css/dataTables.bootstrap.css" />
+    <link href="assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+    <link href="vendor/kendo/styles/kendo.common.core.min.css" rel="stylesheet" />
+    <link href="vendor/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendor/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="vendor/kendo/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/kendo/js/kendo.all.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/js/kendo.all.min.js"></script>
+    <script src="assets/js/metisMenu.js"></script>
+    <!--<script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/dataTables.bootstrap.min.js"></script>-->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrapValidator.min.js"></script>
+
+    <script src="assets/js/remax.js?v=191008_2341"></script>
+    <script src="assets/js/userprofile.js?v=191008_2341"></script>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div w3-include-html="nav.html"></div>
+
+        <div id="page-wrapper" style="min-height: auto;">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="page-header"><h1><em class="fa fa-user fa-1x"></em> <span id="userNameHeading">{User Name}</span></h1></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Update Profile</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <form class="form-horizontal" role="form" id="form_userprofile" method="post">
+                                    <!-- Input Fields -->
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" id="id" name="id">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Full Name :</label>
+                                        <input class="form-control" type="text" id="userName" name="userName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Company :</label>
+                                        <!--<input class="form-control" type="text"  id="userParent" name="userParent">-->
+                                        <select class="form-control" id="userParent" disabled="disabled" name="userParent"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Job Title :</label>
+                                        <input class="form-control" type="text" id="userTitle" name="userTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Business Phone :</label>
+                                        <input class="form-control" type="text" id="userPhone" name="userPhone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Mobile :</label>
+                                        <input class="form-control" type="text" id="userMobile" name="userMobile">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Email (Login ID):</label>
+                                        <input class="form-control" type="text" disabled="disabled" id="userEmail" name="userEmail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Country</label>
+                                        <select class="form-control" id="userCountry" name="userCountry"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Two Factor Authentication</label>
+                                        <select class="form-control" id="userTwoFA" name="userTwoFA">
+                                            <option>Yes</option>
+                                            <option selected>No</option>
+                                        </select>
+                                        <img id="twoFAQR" /><br/>
+                                        <label class="control-label">Key</label>
+                                        <input class="form-control" type="text" id="twoFAKey" name="twoFAKey" disabled>
+                                    </div>
+                                    <!-- Buttont Grop -->
+                                    <div class="form-group">
+                                        <button class="btn btn-default btn-primary pull-left" type="submit" id="btnSave" name="btnSave">Save</button>
+                                        <!--<button class="btn btn-default pull-left" type="button" style="margin-left:12px" id="btnReset" name="btnReset" onclick="userprofile.btnReset_OnClick">Reset</button>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Profile Security</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <div class="btn-group" role="group"><button class="btn btn-default pull-left" type="button" data-toggle="modal" data-target="#change_password">Change Password</button></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-basic footer-remax">
+        <footer>
+            <div w3-include-html="footer.html"></div>
+        </footer>
+    </div>
+
+    <div id="model_dialogs">
+
+        <!-- Password changes modal dialog -->
+        <div>
+            <div class="modal fade" role="dialog" tabindex="-1" id="change_password" aria-labelledby="registrationLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">
+                                <em class="fa fa-unlock-alt fa-1x"></em>
+                                Change Password
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="oldPassword">Old Password</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="oldPassword" placeholder="Old Password" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="newPassword">New Password</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="newPassword" placeholder="New Password" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="retypePassword">Retype Password</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="retypePassword" placeholder="Retype Password" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" type="button" data-dismiss="modal" id="btnClose" name="btnClose">Close</button>
+                            <button class="btn btn-primary" type="button" data-dismiss="modal" id="btnChangePassword" name="btnChangePassword"
+                                    onclick="userprofile.btnChangePassword_OnClick()">
+                                Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for displaying the messages -->
+        <div class="modal fade" id="messageModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">
+                            <em class="fa fa-warning fa-1x"> </em> Server Error(s)
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- The messages container -->
+                        <div id="errors"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        includeHTML();
+
+        $(document).ready(function () {
+            // Calling on load method from userprofile.js
+            userprofile.onload();
+        });
+
+    </script>
+</body>
+
+</html>

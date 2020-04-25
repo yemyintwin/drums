@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>Report - Trending</title>
+
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="/assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="/assets/css/kendo.common.min.css">
+    <link rel="stylesheet" href="/assets/css/kendo.default.min.css">
+    <link rel="stylesheet" href="/assets/css/kendo.default.mobile.min.css">
+    <link rel="stylesheet" href="/assets/css/metisMenu.css">
+    <link rel="stylesheet" href="/assets/css/remax.css">
+    <link rel="stylesheet" href="/assets/css/print.css">
+    <link rel="stylesheet" href="/assets/css/dataTables.bootstrap.css" />
+    <link href="/assets/datatables-responsive/dataTables.responsive.css" rel="stylesheet" />
+    <link href="/vendor/kendo/styles/kendo.common.core.min.css" rel="stylesheet" />
+    <link href="/vendor/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="/vendor/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/kendo/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="/assets/bootstrap_datetime/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="/assets/bootstrap_select/css/bootstrap-select.min.css" rel="stylesheet" />
+
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/kendo/js/kendo.all.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script>
+    <script src="/assets/js/kendo.all.min.js"></script>
+    <script src="/assets/js/metisMenu.js"></script>
+    <!--<script src="/assets/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/dataTables.bootstrap.min.js"></script>-->
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrapValidator.min.js"></script>
+    <script src="/assets/bootstrap_datetime/js/bootstrap-datepicker.min.js"></script>
+    <!--<script src="/assets/datatables-responsive/dataTables.responsive.js"></script>-->
+    <script src="/assets/bootstrap_select/js/bootstrap-select.min.js"></script>
+
+    <?php
+    
+        $remax = 'assets/js/report-trending.js';
+        if (file_exists($remax)) {
+            $remax_var = filemtime($remax);
+        }
+    
+        $js = 'assets/js/report-trending.js';
+        if (file_exists($js)) {
+            $js_var = filemtime($js);
+        }
+    ?>
+    
+    <script src="/assets/js/remax.js?v=<?php echo $remax_var?>"></script>
+    <script src="/assets/js/report-trending.js?v=<?php echo $js_var?>"></script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div>
+            <div class="">
+                <div class="row">
+                    <div class="col-sm-12 container" style="padding-left:25px">
+                        <em class="fa fa-book fa-3x"></em>&nbsp;<h4 style="display:inline !important">Trending Report</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="vessel">Vessel</label>
+                        <div>
+                            <select class="form-control" id="vessel"></select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="engine">Engine</label>
+                        <div>
+                            <select class="form-control" id="engine"></select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="channel">Channel</label>
+                        <div>
+                            <select class="selectpicker form-control" id="channel" data-width="100%" 
+                                    data-size="15" data-live-search="true" data-dropdown-align-right="true"
+                                    data-selected-text-format="count" multiple>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="from">From</label>
+                        <div class="input-append date">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="from" name="from" placeholder="dd/mm/yyyy" data-provide="datepicker" readonly />
+                                <label class="input-group-btn" for="from">
+                                    <span class="btn btn-default">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="to">To</label>
+                        <div class="input-append date">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="to" name="to" placeholder="dd/mm/yyyy" data-provide="datepicker" readonly />
+                                <label class="input-group-btn" for="to">
+                                    <span class="btn btn-default">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 container">
+                        <label class="control-label" for="btnGenerate">&nbsp;</label>
+                        <div>
+                            <button class="btn btn-primary" type="button" id="btnGenerate">Generate Report</button>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">
+        <div class="col-sm-3 container">
+            <label class="col-sm-3 control-label" for="vessel">From</label>
+            <div class="col-sm-9">
+                <div class="input-append date">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="from" name="from" placeholder="dd/mm/yyyy" data-provide="datepicker" readonly />
+                        <label class="input-group-btn" for="from">
+                            <span class="btn btn-default">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 container">
+            <label class="col-sm-3 control-label" for="">To</label>
+            <div class="col-sm-9">
+                <div class="input-append date">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="to" name="to" placeholder="dd/mm/yyyy" data-provide="datepicker" readonly />
+                        <label class="input-group-btn" for="to">
+                            <span class="btn btn-default">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 container">
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="button" id="btnGenerate">Generate Report</button>
+            </div>
+        </div>
+    </div>-->
+
+            </div>
+
+            <div class="row">
+                &nbsp;
+            </div>
+
+            <div class="row" style="width:100%">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><i class="fa fa-bar-chart-o fa-fw"></i> Output</div>
+                        <div class="panel-body">
+                            <!--<div class="row">
+                                <div class="col-sm-12">
+                                    Hourly format will show up to 48 hours. Above 48 hours (2 days) will show with day format. More than 60 days will show with week format.
+                                </div>
+                            </div>-->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="demo-section k-content wide">
+                                        <div id="dataChart"></div>
+                                        <div class="chart-loading"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="messageModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">
+                            <em class="fa fa-warning fa-1x"> </em> Error(s)
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- The messages container -->
+                        <div id="errors"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            trending.onload();
+        });
+    </script>
+</body>
+</html>
